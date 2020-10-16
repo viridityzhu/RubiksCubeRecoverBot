@@ -35,4 +35,14 @@ Written in Python. There are 5 steps:
 4. 用Two-phase算法求出魔方最优解
 5. 将魔方解以字符串形式通过串口传给Arduino板
 
+首先通过电脑前置摄像头对魔方的三个面进行图像捕捉，使用机器学习分两次完成对魔方六个面的识别，配合OpenCV对图像中魔方块的颜色进行实时检测并读取HSV值，并输出六个面54块颜色，通过Tkinter做出可视化页面，显示解析结果。获得魔方数据后使用Herbert Kociemba's two-phase algorithm对魔方进行求解，得解后将解以字符串的形式通过串口传给Arduino，Arduino控制步进电机转动魔方将其还原。
 
+### Part 2: Turn the cube using Arduino 用Arduino转动魔方
+
+## Two. Hardware Part
+
+- Arduino MEGA2560
+- 42 Stepper * 6
+- L298N to drive
+
+步进电机最开始选择了最为常见的28BYJ-48四相步进电机，在最初的测试中发现其扭矩过小，无法转动魔方，于是更换为扭矩更大的42步进电机，通过L298N驱动。由于需要同时驱动6个四相步进电机，常见的Arduino UNO存在数字信号端口输出不够的情况，因此选择Arduino MEGA2560来进行控制。
