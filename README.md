@@ -8,7 +8,7 @@ A robot to recover Rubik's cube, based on Arduino, using Python combined with Ma
 - https://github.com/g20150120/cubot
 - https://github.com/hkociemba/RubiksCube-TwophaseSolver
 
-## One. Software Part
+## 1. Software Part
 The function of this robot is divided into two parts: **Rubik's cube recognition** and **automatically recover it**.
 
 The first part focuses on recognizing and solving Rubik's cube, which is mainly written in Python. The second part focuses on controlling the Arduino to move the Rubik's cube, which is written in a `.ino` Arduino program.
@@ -17,7 +17,7 @@ The first part focuses on recognizing and solving Rubik's cube, which is mainly 
 
 第一部分实现魔方的识别及求解功能，主要用Python编写；第二部分实现控制Arduino驱动步进电机实现转动魔方，主要实现为.ino格式的单个Arduino程序。
 
-### Part 1: Recognizing and solve the Rubik's cube 魔方识别与求解
+### 1.1. Recognizing and solve the Rubik's cube 魔方识别与求解
 
 Written in Python. There are 5 steps:
 
@@ -37,9 +37,9 @@ Written in Python. There are 5 steps:
 
 首先通过电脑前置摄像头对魔方的三个面进行图像捕捉，使用机器学习分两次完成对魔方六个面的识别，配合OpenCV对图像中魔方块的颜色进行实时检测并读取HSV值，并输出六个面54块颜色，通过Tkinter做出可视化页面，显示解析结果。获得魔方数据后使用Herbert Kociemba's two-phase algorithm对魔方进行求解，得解后将解以字符串的形式通过串口传给Arduino，Arduino控制步进电机转动魔方将其还原。
 
-### Part 2: Turn the cube using Arduino 用Arduino转动魔方
+### 1.2. Turn the cube using Arduino 用Arduino转动魔方
 
-## Two. Hardware Part
+## 2. Hardware Part
 
 - Arduino MEGA2560
 - 42 Stepper * 6
