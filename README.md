@@ -2,7 +2,7 @@
 
 A robot to recover Rubik's cube, based on Arduino, using Python combined with Machine Learning and OpenCV. 
 
-[![introduction-video]()](https://youtu.be/PL91mQkZzbg)
+[![introduction-video](https://github.com/viridityzhu/RubiksCubeRecoverBot/blob/master/intro-pic.png)](https://youtu.be/PL91mQkZzbg)
 
 Thanks to these projects and resources:
 
