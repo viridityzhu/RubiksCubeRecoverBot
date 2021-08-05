@@ -1,14 +1,18 @@
 # RubiksCubeRecoverBot 魔方复原机器人
-A robot to recover Rubik's cube, based on Arduino, using Python combined with Machine Learning and OpenCV. Thanks to these projects and resources:
 
-一个基于Arduino的魔方复原机器人，使用Python编写，结合Machine Learning和OpenCV。 感谢这些项目：
+A robot to recover Rubik's cube, based on Arduino, using Python combined with Machine Learning and OpenCV. 
 
-- https://github.com/krustnic/RubikKeras
-- http://kociemba.org/cube.htm
-- https://github.com/g20150120/cubot
-- https://github.com/hkociemba/RubiksCube-TwophaseSolver
+[![introduction-video]()](https://youtu.be/PL91mQkZzbg)
+
+Thanks to these projects and resources:
+
+* https://github.com/krustnic/RubikKeras
+* http://kociemba.org/cube.htm
+* https://github.com/g20150120/cubot
+* https://github.com/hkociemba/RubiksCube-TwophaseSolver
 
 ## 1. Software Part
+
 The function of this robot is divided into two parts: **Rubik's cube recognition** and **automatically recover it**.
 
 The first part focuses on recognizing and solving Rubik's cube, which is mainly written in Python. The second part focuses on controlling the Arduino to move the Rubik's cube, which is written in a `.ino` Arduino program.
@@ -27,7 +31,9 @@ Written in Python. There are 5 steps:
 4. Solving the Rubik's cube via Two-phase algorithm.
 5. Sending the solution to the Arduino via serial port.
 
-本部分程序采用Python实现。我们将魔方识别与求解的步骤更具体地分为五个部分：
+First, the computer's front camera captures images of every three sides of a Rubik’s cube. The the machine learning program then recognizes the six faces of the Rubik’s cube, with OpenCV to detect the color of each brick and read the HSV value in the image. In real-time, a visualization window outputs colors of 54 bricks on six faces. After obtaining the color data, Herbert Kociemba's two-phase algorithm solves the Rubik's cube. Then, the solution,  in the form of a string, is transmitted to the Arduino through the serial port, and the Arduino controls the stepper motor to rotate the Rubik's cube and recover it.
+
+本部分程序采用Python实现。将魔方识别与求解的步骤更具体地分为五个部分：
 
 1. 采用Keras库建立Unet模型，实现从摄像头图像中分割魔方的6个面。感谢[RubikKeras项目](https://github.com/krustnic/RubikKeras)提供的模型。
 2. 采用OpenCV，解析魔方块的颜色
@@ -41,8 +47,10 @@ Written in Python. There are 5 steps:
 
 ## 2. Hardware Part
 
-- Arduino MEGA2560
-- 42 Stepper * 6
-- L298N to drive
+* Arduino MEGA2560
+* 42 Stepper * 6
+* L298N to drive
+
+The most common stepping motor-- 28BYJ-48 four-phase stepping motor was initially selected. But in the initial test, it was found that its torque was too small to turn the Rubik's Cube, so it was replaced with the 42 stepper motor with greater torque, driven by L298N. Due to the need to drive 6 four-phase stepper motors at the same time, the commonly used Arduino UNO has insufficient digital signal ports, so the Arduino MEGA2560 is used for control.
 
 步进电机最开始选择了最为常见的28BYJ-48四相步进电机，在最初的测试中发现其扭矩过小，无法转动魔方，于是更换为扭矩更大的42步进电机，通过L298N驱动。由于需要同时驱动6个四相步进电机，常见的Arduino UNO存在数字信号端口输出不够的情况，因此选择Arduino MEGA2560来进行控制。
